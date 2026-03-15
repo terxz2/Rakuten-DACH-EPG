@@ -31,13 +31,13 @@ jobs:
           pip install -r requirements.txt
 
       - name: execute py script
-        run: python generate_at.py
+        run: python generate_de.py
 
       - name: execute py script
         run: python generate_ch.py
         
       - name: execute py script
-        run: python generate_de.py
+        run: python generate_at.py
         
       - name: commit files
         run: |
