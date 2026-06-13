@@ -3,6 +3,7 @@ import requests
 from datetime import datetime, timedelta, time, timezone
 import pytz
 import unicodedata
+import time
 
 tz = pytz.timezone('Europe/Berlin')
 
@@ -104,9 +105,17 @@ url_string = (f"classification_id=36&device_identifier=web"
 
 url = "https://gizmo.rakuten.tv/v3/live_channels?" + url_string.replace(":", "%3A")
 print("Grabbing data")
-res = requests.get(url)
-if res.status_code != 200:
-    raise ConnectionError(f"HTTP{res.status_code}: could not get info from server!")
+while True:
+    try:
+        res = requests.get(url)
+        if res.status_code == 200:
+            break
+        else:
+            print(f"Server returned HTTP{res.status_code}. Retrying in 60 seconds...")
+    except Exception as e:
+        print(f"Request error: {e}. Retrying in 60 seconds...")
+
+    time.sleep(60)
 print("Loading JSON")
 json = res.json()['data']
 print(f"\nRetrieved {len(json)} channels:")
