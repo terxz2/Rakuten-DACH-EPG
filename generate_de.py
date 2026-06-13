@@ -3,7 +3,7 @@ import requests
 from datetime import datetime, timedelta, time, timezone
 import pytz
 import unicodedata
-import time
+import time as pytime
 
 tz = pytz.timezone('Europe/Berlin')
 
@@ -115,7 +115,7 @@ while True:
     except Exception as e:
         print(f"Request error: {e}. Retrying in 60 seconds...")
 
-    time.sleep(60)
+    pytime.sleep(60)
 print("Loading JSON")
 json = res.json()['data']
 print(f"\nRetrieved {len(json)} channels:")
