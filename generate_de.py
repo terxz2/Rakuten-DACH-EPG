@@ -67,23 +67,23 @@ Make the channels and programmes into something readable by XMLTV
         programme.set("stop", end_time)
 
         title = etree.SubElement(programme, "title")
-        title.set('lang', 'de')
+        title.set('lang', 'it')
         title.text = pr.get("title")
 
         if pr.get("subtitle") is not None:
             subtitle = etree.SubElement(programme, "sub-title")
-            subtitle.set('lang', 'de')
+            subtitle.set('lang', 'it')
             subtitle.text = remove_control_characters(pr.get("subtitle"))
 
         if pr.get('description') is not None:
             description = etree.SubElement(programme, "desc")
-            description.set('lang', 'de')
+            description.set('lang', 'it')
             description.text = remove_control_characters(pr.get("description"))
 
         if pr.get('tags') is not None:
             if len(pr.get('tags')) > 0:
                 category = etree.SubElement(programme, "category")
-                category.set('lang', 'de')
+                category.set('lang', 'it')
                 for tag in pr.get('tags'):
                     category.text = tag.get("name")
 
@@ -92,14 +92,14 @@ Make the channels and programmes into something readable by XMLTV
 
 days = get_days()
 
-url_string = (f"classification_id=307&device_identifier=web"
+url_string = (f"classification_id=36&device_identifier=web"
               f"&device_stream_audio_quality=2.0&device_stream_hdr_type=NONE&device_stream_video_quality=FHD"
               f"&epg_duration_minutes=360"
               f"&epg_ends_at={days[-1].strftime('%Y-%m-%dT%H:%M:%S.000Z')}"
               f"&epg_ends_at_timestamp={days[-1].timestamp()}"
               f"&epg_starts_at={days[0].strftime('%Y-%m-%dT%H:%M:%S.000Z')}"
               f"&epg_starts_at_timestamp={days[0].timestamp()}"
-              f"&locale=de&market_code=de"
+              f"&locale=it&market_code=it"
               f"&per_page=250")
 
 url = "https://gizmo.rakuten.tv/v3/live_channels?" + url_string.replace(":", "%3A")
