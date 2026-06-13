@@ -121,10 +121,10 @@ for channel in json:
     ch_id = channel['id']
     if channel['images'] is not None:
         images = channel['images']
-        if images.get('artwork_negative') is not None:
-            ch_icon = images.get('artwork_negative')
-        elif images.get('artwork') is not None:
+        if images.get('artwork') is not None:
             ch_icon = images.get('artwork')
+        elif images.get('artwork_negative') is not None:
+            ch_icon = images.get('artwork_negative')
         else:
             ch_icon = None
     if channel['labels'] is not None:
