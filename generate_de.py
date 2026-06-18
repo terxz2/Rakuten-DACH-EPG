@@ -23,7 +23,7 @@ def get_days() -> list:
 #    day_6 = (datetime.combine(datetime.now(), time(0, 0)) + timedelta(6))
 #    day_7 = (datetime.combine(datetime.now(), time(0, 0)) + timedelta(7))
 #    return [now, day_1, day_2, day_3, day_4, day_5, day_6, day_7]
-     return [now, day_1, day_2]
+    return [now, day_1, day_2]
 
 
 def build_xmltv(channels: list, programmes: list) -> bytes:
@@ -206,4 +206,11 @@ channel_xml = build_xmltv(channels_data, programme_data)
 # Write some XML
 with open('Rakuten_DE_epg.xml', 'wb') as f:
     f.write(channel_xml)
-    f.close()
+#    f.close()
+
+# Write GZIP
+import gzip
+with gzip.open('Rakuten_DE_epg.xml.gz', 'wb') as gz:
+    gz.write(channel_xml)
+
+print("EPG salvato e compresso in Rakuten_DE_epg.xml.gz")
